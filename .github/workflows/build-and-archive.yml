@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Gzip process
-        run: find ./dist/ -type f -exec gzip -k -f -9 {} \;
+        run: find ./next/ -type f -exec gzip -k -f -9 {} \;
 
       - name: Create GitHub Release
         id: create_release
@@ -48,7 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create tar.gz archive
-        run: tar -czf nw_f.tar.gz -C dist .
+        run: tar -czf nw_f.tar.gz -C next .
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
