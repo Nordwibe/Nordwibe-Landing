@@ -32,6 +32,14 @@ jobs:
 
       - name: Build project
         run: npm run build
+        
+      - name: Convert all images in ./out to AVIF (keep original filenames)
+        run: |
+          find ./out -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.webp' \) | while read img; do
+            magick convert "$img" "${img}.temp.avif"            
+            rm "$img"            
+            mv "${img}.temp.avif" "$img"
+          done
 
       - name: Gzip process
         run: find ./out/ -type f -exec gzip -k -f -9 {} \;
