@@ -34,7 +34,7 @@ jobs:
         run: npm run build
 
       - name: Gzip process
-        run: find ./.next/ -type f -exec gzip -k -f -9 {} \;
+        run: find ./out/ -type f -exec gzip -k -f -9 {} \;
 
       - name: Create GitHub Release
         id: create_release
